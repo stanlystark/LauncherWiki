@@ -1,4 +1,8 @@
-# Настройка рантайма
+# Введение
+
+В этом разделе вы найдете полезные функции, входящие в рантайм "из коробки", но не включенные по умолчанию
+
+[[toc]]
 
 ## Описание рантайма
 
@@ -11,48 +15,6 @@
 -   [JavaFX CSS Reference Guide](https://openjfx.io/javadoc/17/javafx.graphics/javafx/scene/doc-files/cssref.html)  — Документация JavaFX CSS
 
 :::
-
-## Настройка рантайма
-
-В этом разделе вы найдете полезные функции, входящие в рантайм "из коробки", но не включенные по умолчанию
-
-## Шифрование рантайма
-
--   Скачайте библиотеку  [EnFS](https://mirror.gravitlauncher.com/5.2.x/compat/EnFS-1.0.0.jar)  и положите её в папку launcher-libraries
--   Включите опцию ```runtimeEncrypt``` в конфигурации лаунчсервера и сделайте ```build```
--   Проверьте правильность работы
-
-## Скачивание своей Java
-
--   Скачайте  **архивы**  с JRE/JDK с [Adoptium](https://adoptium.net/) или другого поставщика сборок OpenJDK
--   Распакуйте архивы в папку updates и дайте им понятные названия: ```java17-windows-x86-64```, ```java17-windows-x86``` и т.д.
--   По желанию удалите из сборок JRE/JDK необязательные компоненты для уменьшения объема скачиваемых данных
--   Откройте файл ```config/JavaRuntime/Config.json``` в текстовом редакторе, найдите строку **"javaList": {}** и приведите её к такому виду:
-
-```json
-  "javaList": {
-    "java17-windows-x86-64": "Java 17 b53 mustdie X86_64 javafx true",
-    "java17-windows-x86": "Java 17 b53 mustdie X86 javafx true"
-  },
-```
-
-::: warning Формат записи:
-```
-Java {номер версии} b{номер сборки} {mustdie (это windows)/linux/macosx} {архитектура} javafx {наличие javafx}
-```
-Архитектуры:
-- X86_64 (Intel/AMD 64 бит)
-- X86 (Intel/AMD 32 бит)
-- ARM32 (32 разрядные ARM)
-- ARM64 (64 разрядные ARM)
-:::
-
--   Добавьте названия ваших папок с JRE/JDK в **"protectHandler": {}** конфигурации лаунчсервера LaunchServer.json
-```json
-    "allowUpdates": ["java17-windows-64", "java17-windows-32"],
-```
--   Выполните ```syncup``` и ```build```
--   Проверьте правильность работы
 
 ## Структура рантайма
 
@@ -101,38 +63,6 @@ Java {номер версии} b{номер сборки} {mustdie (это windo
 
 Помимо надписей .properties, файлы поддерживают изменение любых свойств JavaFX, в том числе размеры и расположение элементов, пути до картинок, параметры объектов и вообще любые свойства, которые вы можете указать в .fxml файле
 
-## Кастомные serverButton
-Вы можете использовать под каждый профиль, собственные ```serverButton```.
-
-Для этого, в папке ```components``` создайте папку ```serverButton``` (регистр важен)
-
-Cкопируйте туда файл ```serverButton.fxml```, переименовав его в ```PROFILE_UUID.fxml```,
-
-где ```PROFILE_UUID``` - ```UUID``` вашего профиля, для которого вы делаете ```serverButton```
-
-::: warning Обратите внимание:
-Так как папка теперь не ```components```, а ```components/serverButton```, в вашем fxml, необходимо изменить пути
-к некоторым файлам/папкам:
-:::
-
-```"@../../images/servers/example.png"``` вместо ```"@../images/servers/example.png"```
-
-(где ```example.png``` - изображение на ```serverButton```)
-
-```"@../components.css"``` вместо ```"@components.css"```
-
-```"@../../styles/global.css"``` вместо ```"@../styles/global.css"```
-
-```"@../../styles/variables.css"``` вместо ```"@../styles/variables.css"```
-
-## ProfileWhitelist профиля клиента
-Позволяет скрыть клиент от всех пользователей, кроме записаных в profileWhitelist
-
-В профиле клиента установите `"limited": true,`
-
-В конфиге `LaunchServer.json`:
-- `"protectHandler": {`
-  - `"profileWhitelist": {"TITLE ПРОФИЛЯ": ["Ник1", "Ник2"]},`
 
 ## Отладка рантайма
 

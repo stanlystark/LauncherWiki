@@ -1,4 +1,6 @@
-# Настройка авторизации
+# Авторизация
+
+[[toc]]
 
 ## Введение
 
@@ -11,13 +13,13 @@
 - Единый интерфейс проверки пароля
 - Возможность модулям реализовывать поддержку дополнительных функций и получать дополнительные поля
 - Возможность модулям реализовывать авторизацию/регистрацию через соц.сети
-- Множество комманд для управления
+- Множество команд для управления
 
-Для использования команд AuthCoreProvider используйте config auth.ВАШAUTHID.core КОМАНДА АРГУМЕНТЫ<br> Список команд вы можете посмотреть, нажав на TAB
+Для использования команд AuthCoreProvider используйте `config auth.ВАШAUTHID.core КОМАНДА АРГУМЕНТЫ`<br> Список команд вы можете посмотреть, нажав на TAB
 
 AUTH ID это название блока авторизации, например std
 
-В таком случае команды будут выклядеть так: config auth.std.core КОМАНДА АРГУМЕНТЫ
+В таком случае команды будут выглядеть так: `config auth.std.core КОМАНДА АРГУМЕНТЫ`
 
 ## Привилегии
 
@@ -245,8 +247,8 @@ ADD CONSTRAINT `dle_users_hwidfk` FOREIGN KEY (`hwidId`) REFERENCES `hwids` (`id
 :::
 ::::
 ::: tip Настройте следующие конфигурации:
-- [\[ PasswordVerifier \]](#конфигурация-passwordverifier)
-- [\[ TextureProvider \]](../other/#textureprovider)
+- [PasswordVerifier](#конфигурация-passwordverifier)
+- [TextureProvider](../other/#textureprovider)
 :::
 Для работы HWID включите опцию ```enableHardwareFeature``` в ```protectHandler``` и измените его ```type``` на ```advanced```
 ::: tip Важно
@@ -378,7 +380,6 @@ UPDATE users SET uuid=(SELECT uuid_generate_v4()) WHERE uuid IS NULL;
 }
 ```
 
-::::
 ::: tip Примечания:
 -  Проверяет пароль аналогично функции ```password_verify``` в языке PHP
 -  Большинство современных CMS использует именно этот тип хеширования пароля
